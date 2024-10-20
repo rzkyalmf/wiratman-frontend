@@ -1,7 +1,6 @@
 {
   "printWidth": 135,
   "semi": true,
-  "plugins": ["prettier-plugin-tailwindcss"],
   "tailwindFunctions": ["tv"],
   "overrides": [
     {
