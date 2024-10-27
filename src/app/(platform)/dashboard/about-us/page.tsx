@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Page() {
-  return <div>about us</div>;
+  return <div>About Us</div>;
 }

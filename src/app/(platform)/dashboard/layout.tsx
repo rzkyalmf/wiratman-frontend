@@ -15,7 +15,7 @@ import {
 import { redirect } from "next/navigation";
 
 import { LogoutButton } from "@/components/auth/logout";
-import { Menu } from "@/components/menu-usepath";
+import { Menu } from "@/components/platform/menu-usepath";
 import serverAuth from "@/libs/server-auth";
 
 export default async function Layout({ children }: React.PropsWithChildren) {
@@ -31,7 +31,7 @@ export default async function Layout({ children }: React.PropsWithChildren) {
         <aside className="w-[220px] flex-col justify-between border-slate-200 bg-white p-6 text-slate-950 md:flex">
           <div className="flex flex-col gap-8">
             <div>
-              <p className="pb-2 font-medium">Main Menu</p>
+              <p className="pb-2 font-medium">Home</p>
               <Menu href="/dashboard" icon={<Home size={19} />}>
                 Homepage
               </Menu>
