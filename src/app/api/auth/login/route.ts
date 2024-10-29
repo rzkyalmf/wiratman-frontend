@@ -1,37 +1,41 @@
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-interface LoginResponse {
-  message: string;
-}
+import { ILoginRequest, ILoginResponse } from "@/types/auth";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001";
-
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as { email: string; password: string };
+    // Parse request body
+    const loginData = (await request.json()) as ILoginRequest;
 
-    const response = await fetch(`${API_URL}/user/login`, {
+    // Call authentication API
+    const response = await fetch(`${process.env.API_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(loginData),
     });
 
-    const data = (await response.json()) as LoginResponse;
+    const data = (await response.json()) as ILoginResponse;
 
-    const nextResponse = NextResponse.json(data, {
-      status: response.status,
-    });
+    console.log(data);
 
-    const cookies = response.headers.get("set-cookie");
-
-    if (!cookies) {
-      return nextResponse;
+    // Handle error response
+    if (!response.ok) {
+      return NextResponse.json({ message: data.message });
     }
 
-    nextResponse.headers.set("set-cookie", cookies);
-    return nextResponse;
+    // Create response with cookies
+    const cookies = response.headers.get("set-cookie");
+    if (!cookies) {
+      return NextResponse.json({ message: "No session cookies received" });
+    }
+
+    // Return successful response with cookies
+    return NextResponse.json(data, {
+      headers: { "set-cookie": cookies },
+    });
   } catch (error) {
     return NextResponse.json({ message: "Login failed" }, { status: 500 });
   }

@@ -6,8 +6,6 @@ interface AuthPayload {
   email: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001";
-
 export default async function serverAuth() {
   const token = cookies().get("token")?.value;
 
@@ -16,7 +14,7 @@ export default async function serverAuth() {
   }
 
   try {
-    const response = await fetch(`${API_URL}/user/protected`, {
+    const response = await fetch(`${process.env.API_URL}/user/protected`, {
       headers: {
         Cookie: `token=${token}`,
       },

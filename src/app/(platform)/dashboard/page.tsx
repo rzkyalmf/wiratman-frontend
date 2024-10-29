@@ -1,11 +1,11 @@
 import React from "react";
 
-import { HomePage } from "@/components/platform/homepage";
+import { HomePageForm } from "@/components/platform/homepage/homepage";
 
 export default function Page() {
   return (
     <>
-      <HomePage />
+      <HomePageForm />
     </>
   );
 }
