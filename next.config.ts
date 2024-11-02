@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/require-await */
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // /* other config options here */
-  // rewrites: async () => {
-  //   return [
-  //     {
-  //       source: "/api/login",
-  //       destination: "http://localhost:8001/user/login",
-  //     },
-  //   ];
-  // },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost:8000",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

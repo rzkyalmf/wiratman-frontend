@@ -14,7 +14,7 @@ export default async function serverAuth() {
   }
 
   try {
-    const response = await fetch(`${process.env.API_URL}/user/protected`, {
+    const response = await fetch(`${process.env.API_URL}/api/v1/auth/me`, {
       headers: {
         Cookie: `token=${token}`,
       },
